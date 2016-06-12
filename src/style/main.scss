@@ -1,0 +1,77 @@
+@import "_variables.scss";
+@import "_reset.scss";
+//@import "_position.scss";
+@import "flex";
+
+body {
+    background: #f5f5f5;
+}
+#contentMain {
+    margin-left: 250px;
+    background: $white;
+    height:100%;
+    border-left: 1px solid #e5e5e5;
+}
+
+#contentBody {
+}
+
+#contentPage {
+    padding: $padding-big;
+}
+
+#tableOperate span {
+    cursor: pointer;
+}
+
+.B_main {
+    width: 94%;
+    margin: auto;
+}
+
+
+table.table {
+    thead {
+        background: rgb(0, 188, 212);
+        color: #fff;
+        tr th {
+            outline: none;
+        }
+    }
+    tbody {
+        &.reactable-data {
+            tr td {
+                text-align: center;
+            }
+            border: 1px solid #eceeef;
+        }
+    }
+}
+
+.text-center { text-align: center}
+.sr-only { display: none}
+ul.pagination {
+    margin-top: -50px;
+    li {
+        &.active {
+            a {
+                background: rgb(0, 188, 212);
+                cursor: pointer;
+                border-color: rgb(0, 188, 212);
+                span {
+                    color: #fff !important;
+                }
+                &.hover {
+                    background: #25AEBF !important;
+                }
+            }
+        }
+        span {
+            color: rgb(0, 188, 212);
+        }
+    }
+}
+a { outline: none !important;}
+
+
+
