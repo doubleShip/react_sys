@@ -9,10 +9,16 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
+import {List, ListItem} from 'material-ui/List';
+///icon
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ActionViewList from 'material-ui/svg-icons/action/view-list';
+import ContentSend from 'material-ui/svg-icons/content/send';
+
 export default class Menu extends React.Component {
 
 	render() {
-		const { setMoudleName } = this.props;
+		const { menus } = this.props;
 		return (
 			<Drawer
 				docked={false}
@@ -24,9 +30,30 @@ export default class Menu extends React.Component {
 					title="菜单"
 					iconElementLeft={<IconButton onTouchTap={this.props.close}><NavigationClose /></IconButton>}
 				/>
-				<MenuItem onTouchTap={this.props.close}><Link to="ad">广告管理</Link></MenuItem>
-				<MenuItem onTouchTap={this.props.close}><Link to="pv">流量分析</Link></MenuItem>
-				<MenuItem onTouchTap={this.props.close}><Link to="userAnalyze">用户分析</Link></MenuItem>
+
+				<List>
+					{menus.map(data => {
+						let childrenItmes = [];
+						{data.childMenu.map((childList,v) => {
+							let childrenItem = <Link to={childList.menuLink} key={childList.id}><ListItem
+								primaryText={childList.menuName}
+								leftIcon={<ActionGrade />}
+								onTouchTap={this.props.close}
+							/></Link>;
+							childrenItmes.push(childrenItem);
+						})}
+						return (
+							<ListItem
+								primaryText={data.menuName}
+								leftIcon={<ActionViewList />}
+								initiallyOpen={false}
+								key={data.id}
+								primaryTogglesNestedList={true}
+								nestedItems={childrenItmes}
+							/>
+						);
+					})}
+				</List>
 			</Drawer>
 		);
 	}

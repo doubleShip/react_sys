@@ -9,7 +9,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 //导入组件
-import { App, Ad, Pv, UserAnalyze } from './view';
+import { App, Ad, Pv, UserAnalyze, Portal } from './view';
 
 //导入样式
 import './../style/main.scss'
@@ -28,6 +28,7 @@ let rootInstance = render(
 				<Route path="ad" component={Ad} />
 				<Route path="pv" component={Pv} />
 				<Route path="userAnalyze" component={UserAnalyze} />
+				<Route path="portal" component={Portal} />
 			</Route>
 		</Router>
 	</Provider>,

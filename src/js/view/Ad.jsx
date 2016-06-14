@@ -57,7 +57,7 @@ class Ad extends Component {
 	tableOperateBtn(val, row) {
 		const { dispatch } = this.props;
 		const showAdEdit = this.showEditDialog;
-		let confirmMsg = '是否确认删除"'+row.adName+'这条数据?';
+		let confirmMsg = '是否确认删除"'+row.adName+'"这条数据?';
 		return (
 			<div id="tableOperate">
 				<ButtonIcon title="删除" icon="delete" onClick={()=>dispatch(appAction.isShowConfirmDialog(true,confirmMsg,row.adId))} />
@@ -135,34 +135,28 @@ class Ad extends Component {
 		dispatch(requestAsync({
 			"url" : AJAXURL.adDelete,
 			"data" : { "adId" : v }
-		},'deleteRequest',() => {
+		},'deleteRequest',(a) => {
 			//成功后回调隐藏model
 			dispatch(appAction.isShowConfirmDialog(false));
 			///重置table的数据
-			let needDeleteItem = null;
-			searchResponse.map((data,num)=>{
-				if(data.adId == v) {
-					needDeleteItem = num;
+			let newData = [];
+			searchResponse.map(data=>{
+				if(data.adId != v) {
+					newData.push(data);
 				}
 			});
-			if(needDeleteItem) {
-				let newDate = searchResponse;
-				newDate.splice(needDeleteItem,1);
-				console.log(newDate);
-				dispatch(resetTableData('adSearchList',newDate))
-			};
+			dispatch(resetTableData('adSearchList',newData));
 		}))
 	}
 
 	render() {
 		const { menus, searchResponse, showAddAdModal, dispatch, confirmDialog, searchSubmitData } = this.props;
-
 		return (
-			<div>
+			<div className="B_page">
 				<Title title="广告管理" />
 				<div className="B_main">
-					<div className="flex-column flex-md flex-sm">
-						<div className="flex-item">
+					<div className="flex-column flex-between flex-md flex-sm">
+						<div className="flex-item-6">
 							<Input
 								title="广告名称"
 								value={searchSubmitData.adName}
@@ -170,37 +164,40 @@ class Ad extends Component {
 								change={this.handleChangeVal }
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<Select
 								value={searchSubmitData.adStatus}
 								title="广告状态"
 								stateName="adStatus"
 								options={menus.adStatusOptions}
 								onChange={this.handleChangeVal }
+								optionValue="dicValue"
+								optionKey="dicId"
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<Select
 								value={searchSubmitData.adProject}
 								title="所属项目"
 								stateName="adProject"
 								options={menus.adProjectOptions}
 								onChange={this.handleChangeVal }
+								optionValue="dicValue"
+								optionKey="dicId"
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<Select
 								value={searchSubmitData.adType}
 								title="广告类型"
 								stateName="adType"
 								options={menus.adTypeOptions}
 								onChange={this.handleChangeVal }
+								optionValue="dicValue"
+								optionKey="dicId"
 							/>
 						</div>
-					</div>
-
-					<div className="flex-column flex-md flex-sm">
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<DatePick
 								value={searchSubmitData.adStartTime}
 								title="开始时间起始"
@@ -208,7 +205,7 @@ class Ad extends Component {
 								onChange={this.handleChangeVal }
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<DatePick
 								value={searchSubmitData.adStartEnd}
 								title="开始时间结束"
@@ -216,7 +213,7 @@ class Ad extends Component {
 								onChange={this.handleChangeVal }
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<DatePick
 								value={searchSubmitData.adEndTime}
 								title="结束时间起始"
@@ -224,7 +221,7 @@ class Ad extends Component {
 								onChange={this.handleChangeVal }
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<DatePick
 								value={searchSubmitData.adEndEnd}
 								title="结束时间结束"
@@ -238,10 +235,12 @@ class Ad extends Component {
 						<div className="flex-item">
 							<Button
 								title="查询"
+								icon="search"
 								onTouchEnd={this.handleSubmit}
 							/>
 							<Button
 								title="新建"
+								icon="add"
 								onTouchEnd={()=>dispatch(appAction.isShowAdModal(true))}
 							/>
 						</div>

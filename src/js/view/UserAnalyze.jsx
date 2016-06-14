@@ -69,11 +69,11 @@ class UserAnalyze extends Component {
 	render() {
 		const { menus, searchResponse, dispatch, searchSubmitData } = this.props;
 		return (
-			<div>
+			<div className="B_page">
 				<Title title="用户分析" />
 				<div className="B_main">
-					<div className="flex-column flex-md flex-sm">
-						<div className="flex-item">
+					<div className="flex-column flex-between flex-md flex-sm">
+						<div className="flex-item-6">
 							<Input
 								title="广告名称"
 								value={searchSubmitData.adName}
@@ -81,37 +81,40 @@ class UserAnalyze extends Component {
 								change={this.handleChangeVal }
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<Select
 								value={searchSubmitData.adStatus}
 								title="广告状态"
 								stateName="adStatus"
 								options={menus.adStatusOptions}
 								onChange={this.handleChangeVal }
+								optionValue="dicValue"
+								optionKey="dicId"
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<Select
 								value={searchSubmitData.adProject}
 								title="所属项目"
 								stateName="adProject"
 								options={menus.adProjectOptions}
 								onChange={this.handleChangeVal }
+								optionValue="dicValue"
+								optionKey="dicId"
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<Select
 								value={searchSubmitData.adType}
 								title="广告类型"
 								stateName="adType"
 								options={menus.adTypeOptions}
 								onChange={this.handleChangeVal }
+								optionValue="dicValue"
+								optionKey="dicId"
 							/>
 						</div>
-					</div>
-
-					<div className="flex-column flex-md flex-sm">
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<DatePick
 								value={searchSubmitData.adStartTime}
 								title="开始时间"
@@ -119,7 +122,7 @@ class UserAnalyze extends Component {
 								onChange={this.handleChangeVal }
 							/>
 						</div>
-						<div className="flex-item">
+						<div className="flex-item-6">
 							<DatePick
 								value={searchSubmitData.adEndTime}
 								title="结束时间"
@@ -133,6 +136,7 @@ class UserAnalyze extends Component {
 						<div className="flex-item">
 							<Button
 								title="查询"
+								icon="search"
 								onTouchEnd={this.handleSubmit}
 							/>
 						</div>

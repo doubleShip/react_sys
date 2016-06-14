@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { AJAXURL } from './../../core/config';
 
-import { requestAsync, appAction } from './../../action';
+import { requestAsync, appAction, resetTableData } from './../../action';
 import { Select, DatePick, Input, Button, Dialog, ButtonFlat } from './../../component';
 import { initAppState } from './../../reducer/initState';
 
@@ -24,7 +24,7 @@ class ModalAddAd extends React.Component {
 	 * @param e
 	 */
 	handleSubmit(e) {
-		const { addSubmitData, dispatch, onHide } = this.props;
+		const { addSubmitData, dispatch, onHide, searchResponse } = this.props;
 		dispatch(requestAsync({
 			"url" : AJAXURL.adAdd,
 			"data" : addSubmitData
@@ -32,6 +32,20 @@ class ModalAddAd extends React.Component {
 			onHide(); //成功后回调隐藏model
 			// 重置新增窗口数据
 			dispatch(appAction.restData('adAdd',initAppState.adAdd));
+			///重置table的数据
+			if(addSubmitData.adId != "") {
+				let newData = [];
+				searchResponse.map(data=>{
+					if(data.adId != addSubmitData.adId) {
+						newData.push(data);
+					}
+					else {
+						newData.push(addSubmitData)
+					}
+				});
+				dispatch(resetTableData('adSearchList',newData));
+			}
+
 		}))
 	}
 
@@ -59,10 +73,12 @@ class ModalAddAd extends React.Component {
 		];
 
 		const { menus, operateResult, addSubmitData } = this.props;
+		let modelTitle = "新建广告";
+		if(addSubmitData.adId != "") modelTitle = "编辑广告";
 
 		return (
 			<Dialog
-				title="新建广告"
+				title={modelTitle}
 				actions={actions}
 				modal={true}
 				open={this.props.show}
@@ -76,6 +92,8 @@ class ModalAddAd extends React.Component {
 							value={addSubmitData.adName}
 							stateName="adName"
 							change={this.handleChangeVal }
+							reg={/\S{4,32}/}
+							errorText="必填字段,长度为4到32个字"
 						/>
 					</div>
 					<div className="flex-item">
@@ -85,6 +103,10 @@ class ModalAddAd extends React.Component {
 							stateName="adStatus"
 							options={menus.adStatusOptions}
 							onChange={this.handleChangeVal }
+							optionValue="dicValue"
+							optionKey="dicId"
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 					<div className="flex-item">
@@ -94,6 +116,10 @@ class ModalAddAd extends React.Component {
 							stateName="adProject"
 							options={menus.adProjectOptions}
 							onChange={this.handleChangeVal }
+							optionValue="dicValue"
+							optionKey="dicId"
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 					<div className="flex-item">
@@ -103,6 +129,10 @@ class ModalAddAd extends React.Component {
 							stateName="adType"
 							options={menus.adTypeOptions}
 							onChange={this.handleChangeVal }
+							optionValue="dicValue"
+							optionKey="dicId"
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 				</div>
@@ -114,6 +144,8 @@ class ModalAddAd extends React.Component {
 							value={addSubmitData.adAddr}
 							stateName="adAddr"
 							change={this.handleChangeVal }
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 					<div className="flex-item">
@@ -122,6 +154,8 @@ class ModalAddAd extends React.Component {
 							value={addSubmitData.adDomain}
 							stateName="adDomain"
 							change={this.handleChangeVal }
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 					<div className="flex-item">
@@ -131,6 +165,10 @@ class ModalAddAd extends React.Component {
 							stateName="adSocialSoftware"
 							options={menus.socialsoftOptins}
 							onChange={this.handleChangeVal }
+							optionValue="dicValue"
+							optionKey="dicId"
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 					<div className="flex-item">
@@ -139,6 +177,8 @@ class ModalAddAd extends React.Component {
 							value={addSubmitData.adCostBudget}
 							stateName="adCostBudget"
 							change={this.handleChangeVal }
+							reg={/\S/}
+							errorText="必填字段"
 						/>
 					</div>
 				</div>
@@ -168,7 +208,8 @@ class ModalAddAd extends React.Component {
 let mapStateToProps = state => ({
 	menus: state.menuRedurce, // 菜单和下拉选项的数据
 	operateResult: state.requestState.adAddRequest, // 查询新增数据的结果
-	addSubmitData: state.appState.adAdd
+	addSubmitData: state.appState.adAdd,
+	searchResponse: state.requestState.adSearchList // 查询返回的结果
 });
 
 export default connect(mapStateToProps)(ModalAddAd);

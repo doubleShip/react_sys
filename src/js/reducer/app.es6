@@ -16,6 +16,7 @@ const searchEleSet = (state = {}, action) => {
 		case actionName.SET_ADSEARCH :
 		case actionName.SET_PVSEARCH :
 		case actionName.SET_USERANALYZESEARCH :
+		case actionName.SET_PORTALSEARCH :
 			return Object.assign({}, state, {
 				[action.target] : action.value
 			});
@@ -35,6 +36,10 @@ const appState = ( state = initAppState, action ) => {
 		case actionName.SET_PVSEARCH :
 			return Object.assign({}, state, {
 				pvSearch : searchEleSet(state.pvSearch, action)
+			});
+		case actionName.SET_PORTALSEARCH :
+			return Object.assign({}, state, {
+				portalDataSearch : searchEleSet(state.portalDataSearch, action)
 			});
 		case actionName.SET_USERANALYZESEARCH :
 			return Object.assign({}, state, {

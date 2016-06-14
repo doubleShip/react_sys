@@ -3,6 +3,8 @@
  */
 import React, {PropTypes} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import ActionSearch from 'material-ui/svg-icons/action/search';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import './_button.scss';
 const style = {
 	margin: 12
@@ -26,6 +28,17 @@ export default class Button extends React.Component {
 		disabled : false
 	};
 	render() {
+		let icon = "";
+		switch(this.props.icon) {
+			case "search" :
+				icon = <ActionSearch />;
+				break;
+			case "add" :
+				icon = <ContentAdd />;
+				break;
+			default :
+				icon = "";
+		}
 		return (
 			<RaisedButton
 				label={this.props.title}
@@ -35,7 +48,7 @@ export default class Button extends React.Component {
 				href={this.props.href}
 				className={this.props.className}
 				disabled={this.props.disabled}
-				icon={this.props.icon}
+				icon={icon}
 				onTouchStart={this.props.onTouchStart}
 				onTouchEnd={this.props.onTouchEnd}
 				onMouseUp={()=>this.props.onTouchEnd()}

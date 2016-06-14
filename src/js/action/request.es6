@@ -48,7 +48,7 @@ function requestAsync(params = {},target="",callback = null) {
 				if(msg.status == 1) { //成功
 					dispatch(RQ.success(target,msg.data,"操作成功!","success"));//更新状态机
 					if(callback) {
-						callback();//回调
+						callback(dispatch);//回调
 					}
 				}
 				else { //失败
@@ -73,10 +73,21 @@ export const resetTableData = (target,data) => ({
 	target,
 	data
 });
-//
-//export const resetMsg = () => ({
-//	type: REQUEST_INFORESET
+
+//const resetData = (target,data) => ({
+//	type: RESET_TABLEDATA,
+//	target,
+//	data
 //});
+//
+//
+//export function resetTableData(target,data) {
+//	return dispatch => {
+//		setTimeout(function(){
+//			dispatch(resetData(target,data));
+//		},4000)
+//	};
+//}
 
 
 

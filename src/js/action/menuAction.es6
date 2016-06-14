@@ -242,11 +242,6 @@ const menuAction = {
 
 
 	}),
-	setCurrentMoudle : currentMenu => ({
-		type : "SET_CURRENTMENU",
-		currentMenu
-	}),
-
 	openMenu : value => ({
 		type : "OPEN_MENU",
 		value

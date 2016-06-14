@@ -7,7 +7,7 @@ var env = process.env.NODE_ENV;
 //输出HTML和CSS等等文件到路径的插件
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var vendor = ['react','react-dom','moment','react-redux','react-tap-event-plugin','material-ui','react-data-components']; // 第三方库包
+var vendor = ['react','react-dom','moment','react-redux','react-tap-event-plugin','material-ui','react-data-components','react-highcharts']; // 第三方库包
 
 //var deps = [
 //    'react/dist/react.min.js',

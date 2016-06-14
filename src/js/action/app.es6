@@ -9,7 +9,8 @@ export const actionName  = {
 	SHOW_CONFIRMMODAL : "SHOW_CONFIRMMODAL",
 	RESET_DATA : "RESET_DATA",
 	SET_PVSEARCH : "SET_PVSEARCH",
-	SET_USERANALYZESEARCH : "SET_USERANALYZESEARCH"
+	SET_USERANALYZESEARCH : "SET_USERANALYZESEARCH",
+	SET_PORTALSEARCH : "SET_PORTALSEARCH"
 };
 
 const appAction = {
@@ -28,6 +29,12 @@ const appAction = {
 	//设置用户分析
 	setUserAnalyzeSearchEleStatus : (eleName,value) => ({
 		type : actionName.SET_USERANALYZESEARCH,
+		target : eleName,
+		value
+	}),
+	//设置门户查询字段
+	setPortalSearchEleStatus : (eleName,value) => ({
+		type : actionName.SET_PORTALSEARCH,
 		target : eleName,
 		value
 	}),

@@ -50,7 +50,10 @@ export const initAppState = {
 		adStartTime:moment().format('YYYY-MM-DD'),
 		adEndTime:moment().format('YYYY-MM-DD')
 	}, // 用户分析查询字段
-	portalDataSearch : [], //门户数据查询字段
+	portalDataSearch : {
+		adStartTime:moment().format('YYYY-MM-DD'),
+		adEndTime:moment().format('YYYY-MM-DD')
+	}, //门户数据查询字段
 	reportDataSearch : [], //数据渠道报表查询
 	reportProjectSearch : [] //项目数据报表查询
 };

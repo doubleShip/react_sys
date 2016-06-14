@@ -17,7 +17,9 @@ import ButtonFlat from './button/ButtonFlat';
 import Info from './info/Info';
 import ConfirmDialog from './dialog/ConfirmDialog';
 import Reactable from 'reactable';
+import ReactHighcharts from 'react-highcharts';
+import Footer from './footer/Footer';
 
 const Table = Reactable.Table;
 
-export {Header,Menu,Select,DatePick,Input,Title,Button,DataTable,Loading,ButtonIcon,ButtonFlat,Dialog,Info,ConfirmDialog,Table};
+export {Header,Menu,Select,DatePick,Input,Title,Button,DataTable,Loading,ButtonIcon,ButtonFlat,Dialog,Info,ConfirmDialog,Table,ReactHighcharts,Footer};

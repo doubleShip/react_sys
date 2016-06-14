@@ -11,7 +11,7 @@ import {cyan500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 //import { Header, Menu, BrandBar, Loading, Info } from './../component';
-import { Header, Menu, Title, Loading, Info } from './../component';
+import { Header, Menu, Title, Loading, Info, Footer } from './../component';
 
 //导入action
 import { menuAction, closeInfo } from './../action';
@@ -25,6 +25,7 @@ const muiTheme = getMuiTheme({
 	},
 	appBar: {
 		height: 50,
+		position: "fixed"
 	}
 });
 
@@ -57,10 +58,12 @@ class App extends React.Component{
 					<Header
 						title="项目数据管理分析管理系统"
 						openMenu={()=>dispatch(menuAction.openMenu(true))}
+						position="fixed"
 					/>
 					<Menu
 						show={ menus.openMenu }
 						close={()=>dispatch(menuAction.openMenu(false))}
+						menus= { menus.list }
 					/>
 					{ children }
 				</div>
