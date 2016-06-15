@@ -19,6 +19,10 @@ import store from './reducer';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+if (module.hot) {
+	module.hot.accept();
+}
+
 // 路由配置
 let rootInstance = render(
 	<Provider store={store}>
@@ -32,16 +36,5 @@ let rootInstance = render(
 			</Route>
 		</Router>
 	</Provider>,
-    document.getElementById('app')
+	document.getElementById('app')
 );
-
-//if (module.hot) {
-//	require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
-//		getRootInstances: function () {
-//			//test
-//			// Help React Hot Loader figure out the root component instances on the page:
-//			// 帮助 React Hot Loader 识别出页面中的根组件
-//			return [rootInstance];
-//		}
-//	});
-//}

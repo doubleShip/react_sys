@@ -9,9 +9,9 @@ export default class Footer extends React.Component {
 	render() {
 
 		return (
-			<div className="footer">
+			<footer className="footer">
 				Version V2.0.0  2016
-			</div>
+			</footer>
 		)
 	}
 }
