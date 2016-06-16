@@ -104,6 +104,7 @@ module.exports = function(options) {
     //////////////////////////////////////////////////////////////////////////////////
     //
     if (mode === 'dev') {
+        process.env.NODE_ENV = 'dev'; //设置环境
         config = merge.smart(config, {
             // 生成sourcemap,便于开发调试,正式打包请去掉此行或改成none
             devtool: "eval",// eval生成 sourcemap 的不同方式
@@ -164,7 +165,7 @@ module.exports = function(options) {
     ////////////////////////////////////////////////////////////////////////////////
 
     if (mode === 'prod') {
-        process.env.NODE_ENV = 'production';
+        process.env.NODE_ENV = 'production'; //设置环境
         config = merge.smart(config, {
             entry: {
                 "js/app": path.join(dir, 'src/js/app.jsx'),

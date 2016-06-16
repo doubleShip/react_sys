@@ -1,24 +1,21 @@
 /**
  * Created by yvan on 16/6/5.
  */
-import { combineReducers, createStore, applyMiddleware } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import menuRedurce from './menuRedurce';
 import requestState from './request';
 import appState from './app';
 
 /**
- * 打印中间件
- * @param store
+ * 所有中间件
  */
-const logger = store => next => action => {
-	console.log('dispatching', action)
-	let result = next(action);
-	console.log('next state', store.getState())
-	return result
-};
+let middleware = applyMiddleware(thunk);
 
+/**
+ * 所有reducer
+ */
 let rootReducer = combineReducers({
 		menuRedurce,
 		requestState,
@@ -26,11 +23,18 @@ let rootReducer = combineReducers({
 		routing: routerReducer
 	});
 
+//debug
+if (module.hot) {
+	const devToolsExtension = window.devToolsExtension
+
+	if (typeof devToolsExtension === 'function') {
+		middleware = compose(middleware, devToolsExtension())
+	}
+}
 
 const store = createStore(
 	rootReducer,
-	applyMiddleware(thunk,logger)
+	middleware
 );
-
 
 export default store;

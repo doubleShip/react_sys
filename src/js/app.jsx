@@ -23,18 +23,21 @@ if (module.hot) {
 	module.hot.accept();
 }
 
+
 // 路由配置
 let rootInstance = render(
-	<Provider store={store}>
-		<Router history={history}>
-			<Route path="/" component={App}>
-				<IndexRoute component={Ad} />
-				<Route path="ad" component={Ad} />
-				<Route path="pv" component={Pv} />
-				<Route path="userAnalyze" component={UserAnalyze} />
-				<Route path="portal" component={Portal} />
-			</Route>
-		</Router>
-	</Provider>,
+	<div>
+		<Provider store={store}>
+			<Router history={history}>
+				<Route path="/" component={App}>
+					<IndexRoute component={Ad} />
+					<Route path="ad" component={Ad} />
+					<Route path="pv" component={Pv} />
+					<Route path="userAnalyze" component={UserAnalyze} />
+					<Route path="portal" component={Portal} />
+				</Route>
+			</Router>
+		</Provider>
+	</div>,
 	document.getElementById('app')
 );
